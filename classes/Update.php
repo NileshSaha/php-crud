@@ -17,15 +17,11 @@ class Update{
 
     public function selectRow(){
         $connect = db();
-
-        echo $sql = "SELECT `name`,`class`,`section` FROM `students` WHERE `id`='{$this->id}'";
-        die();
-        echo $this->id;
+        $sql = "SELECT `name`,`class`,`section` FROM `students` WHERE `id`='{$this->id}'";
         $query = mysqli_query($connect,$sql);
         $row = mysqli_fetch_assoc($query);
         $this->fieldvalue = $row;
         return ($this->fieldvalue);
-       // $this->checkSubmit($row);
     }
 
     private function db(){
@@ -44,26 +40,26 @@ class Update{
         }
     }
 
-    // public function checkSubmit(array $arg){
-    //     foreach($this->fields as $field){
-    //         if(empty($arg[$field])){
-    //             $this->errors[] = $field." value is missing.";
-    //         }
-    //     }
-    //     if(empty($this->errors)){
-    //         foreach($this->fields as $field ){
-    //             $this->fieldvalue[$field]=$arg[$field];
-    //         }
-    //         return true;
-    //     }
-    //     else{
-    //         return false;
-    //     }
-    // }
+    public function checkSubmit(array $arg){
+        foreach($this->fields as $field){
+            if(empty($arg[$field])){
+                $this->errors[] = $field." value is missing.";
+            }
+        }
+        if(empty($this->errors)){
+            foreach($this->fields as $field ){
+                $this->fieldvalue[$field]=$arg[$field];
+            }
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
     public function updateInDB(array $data){
         $connect = db();
-        $sql = "UPDATE `students` SET `name`='{$data['name']}',`section`='{$data['section']}',`class`='{$data['class']}' WHERE `id`='{$id}'";
+        $sql = "UPDATE `students` SET `name`='{$data['name']}',`section`='{$data['section']}',`class`='{$data['class']}' WHERE `id`='{$this->id}'";
         $query = mysqli_query($connect,$sql) or die(mysqli_error($connect));
     }
 

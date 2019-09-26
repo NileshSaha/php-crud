@@ -3,19 +3,20 @@
 <?php
 require 'classes/Update.php';
 $id = $_GET['id'];
-
-$update=new Update($id);
-
+$update = new Update($id);
 $data = $update->selectRow();
 
-print_r($data);
-
-// if($update->updateData($_POST)){
-//     unset($_POST['submit']);
-//     $update->updateInDB($_POST);
-// }else{
-//     $update->output_errors();
-// }
+if($update->checkSubmit($_POST)){
+    unset($_POST['submit']);
+    $update->updateInDB($_POST);
+    ?>
+        <script>
+            window.location.href = '?action=view';
+        </script>
+    <?php
+}else{
+    $update->output_errors();
+}
 
 ?>
 <form action='' method="POST">

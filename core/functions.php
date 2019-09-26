@@ -58,14 +58,14 @@
         $sql = "DELETE FROM `students` WHERE `id`='{$id}'";
         $query = mysqli_query($connect,$sql) or die(mysqli_error($connect));
     }
-
-    function update($id){
-        $connect = db();
-        $sql = "SELECT `name`,`class`,`section` FROM `students` WHERE `id`='{$id}'";
-        $query = mysqli_query($connect,$sql);
-        $row = mysqli_fetch_assoc($query);
-        edit($row,$id);
-    }
+/*
+    // function update($id){
+    //     $connect = db();
+    //     $sql = "SELECT `name`,`class`,`section` FROM `students` WHERE `id`='{$id}'";
+    //     $query = mysqli_query($connect,$sql);
+    //     $row = mysqli_fetch_assoc($query);
+    //     edit($row,$id);
+    // }
 
     function edit($data,$id){
         $fields = [
@@ -128,4 +128,5 @@
             echo $error.'<br>';
         }
     }
+    */
 ?>
